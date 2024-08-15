@@ -1,22 +1,26 @@
-package com.albert.quizintratool.model.entity;
+package com.albert.quizintratool.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
 public class Question {
-    @Id
-    private String question;
 
-    private String topic;
+    @Id
+    private String title;
+
+    @ManyToOne
+    private Topic topic;
 
     private int number;
 
-    @OneToMany
-    private List<String> options;
+    @ElementCollection
+    @Column(name = "OPTION")
+    private Set<String> options = new HashSet<>();
+
+    private String answer;
 }

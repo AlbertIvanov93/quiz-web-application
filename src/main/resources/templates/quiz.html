@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>INTRATOOL тестирование</title>
+    <link rel="stylesheet" th:href="@{/css/style_quiz.css}"/>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+</head>
+<body>
+
+<!-- start test button -->
+<div class="start_btn"><button>Начать тест</button></div>
+
+<!-- Info box -->
+<div class="info_box">
+    <div class="info_title">
+        <span>Правила теста</span>
+    </div>
+    <div class="info_list">
+        <div class="info">1. У вас будет <span>1 минута</span> на каждый вопрос.</div>
+        <div class="info">2. Вы можете выбрать только один ответ, после выбора менять ответ нельзя</div>
+        <div class="info">3. Вы не сможете выбрать ответ, после того как время закончится</div>
+        <div class="info">4. Вы не можете выйти из теста, пока он идет</div>
+        <div class="info">5. Ваш результат будет складываться из суммы правильных ответов</div>
+    </div>
+    <div class="buttons">
+        <!--<button class="quit">Выйти</button>-->
+        <button class="restart">Продолжить</button>
+    </div>
+</div>
+
+<!-- quiz box-->
+<!--<div class="quiz_box_outer">
+    <header><img th:src="@{/images/icon.png}" alt="INTRATOOL"></header>-->
+    <div class="quiz_box" th:each="question, state : ${questions}" th:id="|que${state.index}|">
+        <header>
+            <div class="title">Тест для проверки знаний по металлорежущим станкам</div>
+            <div class="timer">
+                <div class="time_text">Осталось времени</div>
+                <div class="timer_sec"></div>
+            </div>
+            <div class="time_line"></div>
+        </header>
+        <section>
+            <div class="que_text"></div>
+            <!--<div class="que_image"></div>-->
+            <div class="option_list"></div>
+        </section>
+
+        <!-- quiz box footer -->
+        <footer>
+            <div class="total_que"></div>
+            <button class="next_btn">Следующий вопрос</button>
+        </footer>
+    </div>
+<!--</div>-->
+
+
+<!-- result box-->
+<div class="result_box">
+    <div class="date"></div>
+    <div class="icon">
+        <i class="fa fa-graduation-cap"></i>
+    </div>
+    <div class="username"></div>
+    <div class="complete_text"> Вы прошли тест</div>
+    <div class="score_text"></div>
+    <div class="further_action">Сделайте скриншот этого окна и отправьте проверяющему</div>
+    <!--<div class="buttons">
+        <button class="restart">Пройти тест заново</button>
+        <button class="quit">Выйти</button>
+    </div>-->
+</div>
+<script th:src="@{/js/questions.js}"></script>
+<script th:inline="javascript">
+    questions = [[${questions}]];
+    console.log(questions);
+</script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>
