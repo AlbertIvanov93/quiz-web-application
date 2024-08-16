@@ -1,3 +1,4 @@
+/*
 package com.albert.quizintratool.model;
 
 import jakarta.persistence.*;
@@ -54,3 +55,4 @@ public class User implements UserDetails {
         return true;
     }
 }
+*/

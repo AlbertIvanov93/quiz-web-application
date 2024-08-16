@@ -1,3 +1,4 @@
+/*
 package com.albert.quizintratool.repository;
 
 import com.albert.quizintratool.model.User;
@@ -12,4 +13,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
     "where concat(u.lastName, u.firstName)" +
     "like :username")
     User findByUsername(@Param("username")String username);
-}
+}*/

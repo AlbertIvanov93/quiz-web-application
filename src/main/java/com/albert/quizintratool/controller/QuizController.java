@@ -1,6 +1,8 @@
+/*
 package com.albert.quizintratool.controller;
 
 import com.albert.quizintratool.model.Question;
+import com.albert.quizintratool.model.Result;
 import com.albert.quizintratool.model.Topic;
 import com.albert.quizintratool.repository.QuestionRepository;
 import com.albert.quizintratool.repository.TopicRepository;
@@ -42,7 +44,7 @@ public class QuizController {
     }
 
     @PostMapping
-    public void getResult(@RequestBody String result) {
+    public void getResult(@RequestBody Result result) {
         System.out.println(result);
     }
 
@@ -57,6 +59,7 @@ public class QuizController {
     }
 
     //для одного вопроса
+*/
 /*    private void addAttributeToModel(Long topicId, Long queNum, Model model, HttpSession httpSession) {
         Topic topic = topicRepository.findById(topicId).get();
         model.addAttribute("topic", topic);
@@ -68,5 +71,7 @@ public class QuizController {
         Question question = questionRepository.findByTopicIdAndNumber(topicId, queNum);
         System.out.println(question.getOptions().size());
         model.addAttribute("question", question);
-    }*/
+    }*//*
+
 }
+*/
