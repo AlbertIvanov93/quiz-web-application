@@ -11,6 +11,7 @@ import java.util.Set;
 public class Question {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String title;
 
     @ManyToOne

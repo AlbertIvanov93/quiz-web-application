@@ -1,4 +1,3 @@
-/*
 
 package com.albert.quizintratool.model;
 
@@ -9,9 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Data
@@ -20,14 +17,11 @@ import java.util.Map;
 public class Result {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    */
-/*@ManyToOne
-    private User user;*//*
-
-
-    private String user;
+    @ManyToOne
+    private User user;
 
     private Date beginDate;
 
@@ -42,4 +36,3 @@ public class Result {
 
 }
 
-*/

@@ -13,39 +13,43 @@
 <!-- quiz box-->
 <div class="quiz_box_outer">
     <div><img th:src="@{/images/icon.png}" alt="INTRATOOL"></div>
-    <form method="POST" class="quiz_box_inner">
-        <header>
-            <div class="title" th:text="${topic.getName()}">Тест для проверки знаний по металлорежущим станкам</div>
-            <div class="timer">
-                <div class="time_text">Осталось времени</div>
-                <div class="timer_sec"></div>
-            </div>
-            <div class="time_line"></div>
-        </header>
-        <section>
-            <div class="que_text"><span th:text="|${queNum}. ${questions[queNum].getTitle()}|"></span></div>
-            <div class="que_image"></div>
-            <div class="option_list" th:each="option, state : ${questions[queNum].getOptions()}">
-                <input type="radio" th:id="${state.index}" name="option">
-                <label th:for="${state.index}" th:text="${option}">1 вариант</label>
-            </div>
-        </section>
+    <form method="POST">
+        <div class="quiz_box_inner" th:id="|question_${qStat.index}|" th:each="question, qStat : ${questions}">
+            <header>
+                <div class="title" th:text="${question.getTopic().getName()}">Тест для проверки знаний по металлорежущим
+                    станкам
+                </div>
+                <div class="timer">
+                    <div class="time_text">Осталось времени</div>
+                    <div class="timer_sec"></div>
+                </div>
+                <div class="time_line"></div>
+            </header>
+            <section>
+                <div class="que_text"><span th:text="|${qStat.index + 1}. ${question.getTitle()}|"></span></div>
+                <div class="que_image"></div>
+                <div class="option_list" th:each="option, oState : ${question.getOptions()}">
+                    <input type="radio" th:id="${oState.index}" th:name="|option_${qStat.index + 1}|">
+                    <label th:for="${oState.index}" th:text="${option}">вариант</label>
+                </div>
+            </section>
 
-        <!-- quiz box footer -->
-        <footer>
-            <div class="total_que"></div>
-            <input type="submit" class="next_btn" value="Следующий вопрос">
-        </footer>
+            <!-- quiz box footer -->
+            <footer>
+                <div class="total_que"></div>
+                <input type="submit" class="submit_btn" value="Завершить тест">
+                <button type="button" class="next_btn">Следующий вопрос</button>
+            </footer>
+        </div>
+
     </form>
-</div>
-
 
 </div>
-<!--<script th:src="@{/js/questions.js}"></script>
-<script th:inline="javascript">
-    questions = [[${questions}]];
-    console.log(questions);
-</script>-->
-<script th:src="@{/js/script.js}"></script>
+<script>const firstQuestion = document.getElementById("question_0");
+        firstQuestion.classList.add("active_question_0")
+</script>
+<script
+        th:src="@{/js/quiz.js}">
+</script>
 </body>
 </html>

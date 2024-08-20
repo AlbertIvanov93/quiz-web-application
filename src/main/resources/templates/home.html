@@ -9,6 +9,11 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти"/>
+</form>
+
 <div class="topics_box_outer">
     <header><img th:src="@{/images/icon.png}" alt="INTRATOOL"></header>
     <div class="topics_box_inner">
