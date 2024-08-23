@@ -21,8 +21,7 @@
             <div class="topics_title">Выберите тему теста</div>
         </header>
         <div class="topics" th:each="topic : ${topics}">
-            <!--<a class="topic" th:href="@{quiz/(topic_id=${topic.id})}" th:text="${topic.name}">TOPIC</a>-->
-            <a class="topic" th:href="@{quiz2/(topic_id=${topic.id})}" th:text="${topic.name}">TOPIC</a>
+            <a class="topic" th:href="@{quiz/(topic_id=${topic.id})}" th:text="${topic.name}">TOPIC</a>
         </div>
     </div>
 </div>

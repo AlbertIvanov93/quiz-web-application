@@ -1,27 +1,27 @@
-/*
 package com.albert.quizintratool.controller;
 
 import com.albert.quizintratool.model.Question;
 import com.albert.quizintratool.model.Result;
-import com.albert.quizintratool.model.Topic;
+import com.albert.quizintratool.model.User;
 import com.albert.quizintratool.repository.QuestionRepository;
 import com.albert.quizintratool.repository.TopicRepository;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 @Controller
 @RequestMapping("/quiz/")
-@SessionAttributes
+@SessionAttributes("questions")
 public class QuizController {
 
     private final TopicRepository topicRepository;
     private final QuestionRepository questionRepository;
+
 
     @Autowired
     public QuizController(TopicRepository topicRepository, QuestionRepository questionRepository) {
@@ -32,46 +32,54 @@ public class QuizController {
 
     @GetMapping
     public String showQuiz(@RequestParam(name = "topic_id") Long topicId,
-                           @RequestParam(name = "que_num", required = false) Long queNum,
-                           Model model,
-                           HttpSession httpSession) {
+                           Model model) {
+        // если тема есть, то обновить модель и вернуть страницу квиза
         if (topicRepository.findById(topicId).isPresent()) {
-            //addAttributeToModel(topicId, queNum, model, httpSession);
             addAttributeToModel(topicId, model);
             return "quiz";
         }
+        // в ином случае - домашнюю страницу
         return "home";
     }
 
     @PostMapping
-    public void getResult(@RequestBody Result result) {
-        System.out.println(result);
+    public String getResult(@RequestParam(name = "option_que1", required = false) String firstAns,
+                            @RequestParam(name = "option_que2", required = false) String secondAns,
+                            @RequestParam(name = "option_que3", required = false) String thirdAns,
+                            @RequestParam(name = "option_que4", required = false) String forthAns,
+                            @RequestParam(name = "option_que5", required = false) String fifthAns,
+                            @RequestParam(name = "option_que6", required = false) String sixthAns,
+                            @RequestParam(name = "option_que7", required = false) String seventhAns,
+                            @RequestParam(name = "option_que8", required = false) String eighthAns,
+                            @RequestParam(name = "option_que9", required = false) String ninthAns,
+                            @RequestParam(name = "option_que10", required = false) String tensAns,
+                            Model model) {
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println(user.getFirstName() + " " + user.getLastName());
+
+        System.out.println(model.getAttribute("questions"));
+
+        System.out.println(firstAns);
+        System.out.println(secondAns);
+        System.out.println(thirdAns);
+        System.out.println(forthAns);
+        System.out.println(fifthAns);
+        System.out.println(sixthAns);
+        System.out.println(seventhAns);
+        System.out.println(eighthAns);
+        System.out.println(ninthAns);
+        System.out.println(tensAns);
+
+        Result result = new Result(user, new Date(),)
+
+        return "quiz";
     }
 
-    //для всех вопросов
-    private void addAttributeToModel(Long topicId, Model model) {
-        Topic topic = topicRepository.findById(topicId).get();
-        model.addAttribute("topic", topic);
-
-        List<Question> questions = questionRepository.findByTopicId(topicId);
-        Collections.shuffle(questions);
+    @ModelAttribute(name = "questions")
+    private List<Question> addAttributeToModel(Long topicId, Model model) {
+        String modelQuestionsName = "questions";
+        List<Question> questions = questionRepository.findByTopicIdOrderByRandomLimit10(topicId);
         model.addAttribute("questions", questions);
+        return questions;
     }
-
-    //для одного вопроса
-*/
-/*    private void addAttributeToModel(Long topicId, Long queNum, Model model, HttpSession httpSession) {
-        Topic topic = topicRepository.findById(topicId).get();
-        model.addAttribute("topic", topic);
-
-        if (queNum == null) {
-            queNum = 0L;
-            httpSession
-        }
-        Question question = questionRepository.findByTopicIdAndNumber(topicId, queNum);
-        System.out.println(question.getOptions().size());
-        model.addAttribute("question", question);
-    }*//*
-
 }
-*/
