@@ -4,6 +4,7 @@ import com.albert.quizintratool.model.Question;
 import com.albert.quizintratool.model.Result;
 import com.albert.quizintratool.model.User;
 import com.albert.quizintratool.repository.QuestionRepository;
+import com.albert.quizintratool.repository.ResultRepository;
 import com.albert.quizintratool.repository.TopicRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,12 +22,14 @@ public class QuizController {
 
     private final TopicRepository topicRepository;
     private final QuestionRepository questionRepository;
+    private final ResultRepository resultRepository;
 
 
     @Autowired
-    public QuizController(TopicRepository topicRepository, QuestionRepository questionRepository) {
+    public QuizController(TopicRepository topicRepository, QuestionRepository questionRepository, ResultRepository resultRepository) {
         this.topicRepository = topicRepository;
         this.questionRepository = questionRepository;
+        this.resultRepository = resultRepository;
     }
 
 
@@ -55,24 +58,15 @@ public class QuizController {
                             @RequestParam(name = "option_que10", required = false) String tensAns,
                             Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        System.out.println(user.getFirstName() + " " + user.getLastName());
 
-        System.out.println(model.getAttribute("questions"));
+        List<Question> questions = (List<Question>) model.getAttribute("questions");
+        List<String> userAnswer = List.of(firstAns, secondAns, thirdAns, forthAns,
+                fifthAns, sixthAns, seventhAns, eighthAns, ninthAns, tensAns);
 
-        System.out.println(firstAns);
-        System.out.println(secondAns);
-        System.out.println(thirdAns);
-        System.out.println(forthAns);
-        System.out.println(fifthAns);
-        System.out.println(sixthAns);
-        System.out.println(seventhAns);
-        System.out.println(eighthAns);
-        System.out.println(ninthAns);
-        System.out.println(tensAns);
+        Result result = new Result(user, new Date(), questions,userAnswer);
+        resultRepository.save(result);
 
-        Result result = new Result(user, new Date(),)
-
-        return "quiz";
+        return "result/(id=" + result.getId() + ")";
     }
 
     @ModelAttribute(name = "questions")

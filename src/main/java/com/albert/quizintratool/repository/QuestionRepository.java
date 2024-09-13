@@ -10,7 +10,6 @@ import java.util.List;
 
 @Repository
 public interface QuestionRepository extends CrudRepository<Question, String> {
-    Question findByTopicIdAndNumber(Long topicId, Long queNum);
 
     @Query("from Question q where q.topic.id = :id order by random() limit 10")
     List<Question> findByTopicIdOrderByRandomLimit10(@Param("id") Long topicId);
