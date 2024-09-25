@@ -6,9 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Data
@@ -24,16 +22,18 @@ public class Result {
 
     private Date date;
 
-    @OneToMany
-    private List<Question> questions = new ArrayList<>();
+    //@OneToMany
+    //private List<Question> questions = new ArrayList<>(); // совместить в одну мапу
+//
+    //@ElementCollection
+    //private List<String> userAnswer = new ArrayList<>(); // совместить в одну мапу
 
     @ElementCollection
-    private List<String> userAnswer = new ArrayList<>();
+    private Map<Question, String> resultMap = new HashMap<>();
 
-    public Result(User user, Date date, List<Question> questions, List<String> userAnswer) {
+    public Result(User user, Date date, Map<Question, String> resultMap) {
         this.user = user;
         this.date = date;
-        this.questions = questions;
-        this.userAnswer = userAnswer;
+        this.resultMap = resultMap;
     }
 }

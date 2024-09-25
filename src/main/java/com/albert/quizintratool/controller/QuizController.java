@@ -13,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/quiz/")
@@ -60,13 +62,16 @@ public class QuizController {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         List<Question> questions = (List<Question>) model.getAttribute("questions");
+        Map<Question,String> resultMap = new HashMap<>();
         List<String> userAnswer = List.of(firstAns, secondAns, thirdAns, forthAns,
                 fifthAns, sixthAns, seventhAns, eighthAns, ninthAns, tensAns);
+        for (int i = 0; i < 10; i++) {
+            resultMap.put(questions.get(i), userAnswer.get(i));
+        }
 
-        Result result = new Result(user, new Date(), questions,userAnswer);
+        Result result = new Result(user, new Date(), resultMap);
         resultRepository.save(result);
-
-        return "result/(id=" + result.getId() + ")";
+        return "redirect:/result/?id=" + result.getId();
     }
 
     @ModelAttribute(name = "questions")

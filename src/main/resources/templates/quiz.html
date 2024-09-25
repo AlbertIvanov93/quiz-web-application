@@ -9,22 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
-<!--<form method="post">
-    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-    <div>
-        <input type="radio" id="contactChoice1" name="contact" value="email" />
-        <label for="contactChoice1">Email</label>
 
-        <input type="radio" id="contactChoice2" name="contact" value="phone" />
-        <label for="contactChoice2">Phone</label>
-
-        <input type="radio" id="contactChoice3" name="contact" value="mail" />
-        <label for="contactChoice3">Mail</label>
-    </div>
-    <div>
-        <button type="submit">Submit</button>
-    </div>
-</form>-->
 
 <div class="quiz_box_outer">
     <div><img th:src="@{/images/icon.png}" alt="INTRATOOL"></div>
@@ -54,10 +39,11 @@
             <footer>
                 <div class="total_que"></div>
 
-                <button type="button" class="next_btn">Следующий вопрос</button>
+                <button type="button" class="next_btn" th:if="${not qStat.last}">Следующий вопрос</button>
+                <input type="submit" class="submit_btn" th:if="${qStat.last}" value="Завершить тест">
             </footer>
         </div>
-        <input type="submit" class="submit_btn" value="Завершить тест">
+
     </form>
 
 </div>

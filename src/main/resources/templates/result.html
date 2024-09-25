@@ -17,10 +17,20 @@
 <div class="result_box_outer">
     <header><img th:src="@{/images/icon.png}" alt="INTRATOOL"></header>
     <div class="result_box_inner">
-        <div class="user_info" th:text="|${user.getFirstName()} ${user.getFirstName()}|"></div>
-        <div th:class="answer" th:each="res : ${result.getQuestions()}">
-            <div th:text="${res}"></div>
-        </div>
+        <div class="title"> Результаты теста</div>
+        <div class="user_info" th:text="|${user.getFirstName()} ${user.getLastName()}|"></div>
+
+        <table>
+            <tr>
+                <th>Вопрос</th>
+                <th>Ваш ответ</th>
+            </tr>
+            <tr th:each="res : ${result.getResultMap()}">
+                <td th:text="${res.getKey().getTitle()}"></td>
+                <td th:text="${res.getValue()}"
+                    th:styleappend="${res.getKey().getAnswer() == res.getValue() ? 'background: green' : 'background: red'}"></td>
+            </tr>
+        </table>
     </div>
 </div>
 </body>

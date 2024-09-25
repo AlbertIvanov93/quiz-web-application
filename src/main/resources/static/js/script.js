@@ -15,8 +15,7 @@ const timeOff = quiz_box.querySelector("header .time_text");
 const login_box = document.querySelector(".login_box");
 //const rules_btn = login_box.querySelector("footer button");
 
-let userName;
-let date;
+
 
 let tickIcon = '<div class="icon tick"><i class="fa fa-check"></i></div>';
 let crossIcon = '<div class="icon cross"><i class="fa fa-times"></i></div>';

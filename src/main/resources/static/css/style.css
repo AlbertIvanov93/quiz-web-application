@@ -1,4 +1,4 @@
-/*
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins: wght@200;300;400;500;600;700&display=swap');
 
 * {
@@ -212,9 +212,8 @@ footer .total_que span p {
     padding-left: 0;
 }
 
-.next_btn {
-    !*display: none;*!
-    display: block;
+.next_btn, .submit_btn {
+
     height: 40px;
     padding: 0 13px;
     font-size: 18px;
@@ -228,30 +227,11 @@ footer .total_que span p {
     transition: all 0.3s ease;
 }
 
-footer .next_btn:hover {
+footer .next_btn:hover, .submit:hover {
     background: #840028;
 }
 
-.submit_btn {
-    !*display: none;*!
-    display: block;
-    height: 40px;
-    padding: 0 13px;
-    font-size: 18px;
-    font-weight: 400;
-    outline: none;
-    color: #fff;
-    background: #a60132;
-    border-radius: 5px;
-    border: 1px solid #840028;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    opacity: 0;
-}
 
-footer .submit:hover {
-    background: #840028;
-}
 
 form {
     display: block;
@@ -286,4 +266,4 @@ form {
 }
 
 
-*/
+
