@@ -48,16 +48,16 @@ public class QuizController {
     }
 
     @PostMapping
-    public String getResult(@RequestParam(name = "option_que1", required = false) String firstAns,
-                            @RequestParam(name = "option_que2", required = false) String secondAns,
-                            @RequestParam(name = "option_que3", required = false) String thirdAns,
-                            @RequestParam(name = "option_que4", required = false) String forthAns,
-                            @RequestParam(name = "option_que5", required = false) String fifthAns,
-                            @RequestParam(name = "option_que6", required = false) String sixthAns,
-                            @RequestParam(name = "option_que7", required = false) String seventhAns,
-                            @RequestParam(name = "option_que8", required = false) String eighthAns,
-                            @RequestParam(name = "option_que9", required = false) String ninthAns,
-                            @RequestParam(name = "option_que10", required = false) String tensAns,
+    public String getResult(@RequestParam(name = "option_que0", required = false) String firstAns,
+                            @RequestParam(name = "option_que1", required = false) String secondAns,
+                            @RequestParam(name = "option_que2", required = false) String thirdAns,
+                            @RequestParam(name = "option_que3", required = false) String forthAns,
+                            @RequestParam(name = "option_que4", required = false) String fifthAns,
+                            @RequestParam(name = "option_que5", required = false) String sixthAns,
+                            @RequestParam(name = "option_que6", required = false) String seventhAns,
+                            @RequestParam(name = "option_que7", required = false) String eighthAns,
+                            @RequestParam(name = "option_que8", required = false) String ninthAns,
+                            @RequestParam(name = "option_que9", required = false) String tensAns,
                             Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 

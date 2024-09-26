@@ -11,12 +11,12 @@
 <body>
 
 <form th:action="@{/logout}" method="post">
-    <input type="submit" value="Выйти"/>
+    <input class="logout_btn" type="submit" value="Выйти"/>
 </form>
 
-<div class="topics_box_outer">
+<div class="outer_box">
     <header><img th:src="@{/images/icon.png}" alt="INTRATOOL"></header>
-    <div class="topics_box_inner">
+    <div class="inner_box">
         <header>
             <div class="topics_title">Выберите тему теста</div>
         </header>
