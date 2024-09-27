@@ -17,10 +17,11 @@
 <div class="outer_box">
     <div><img th:src="@{/images/icon.png}" alt="INTRATOOL"></div>
     <form method="POST">
-        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
         <div class="inner_box" th:id="|question_${qStat.index}|" th:each="question, qStat : ${questions}">
             <header>
-                <div class="title" th:text="${question.getTopic().getName()}">Тест для проверки знаний по металлорежущим
+                <div class="title" th:text="|Тест по теме: ${question.getTopic().getName()}|">Тест для проверки знаний
+                    по металлорежущим
                     станкам
                 </div>
                 <div class="timer">
@@ -29,20 +30,26 @@
                 </div>
                 <div class="time_line"></div>
             </header>
+
             <section>
-                <div class="que_text"><span th:text="|${qStat.index + 1}. ${question.getTitle()}|"></span></div>
+                <div class="que_text"><span th:text="|${qStat.count}. ${question.getTitle()}|"></span></div>
                 <div class="que_image"></div>
                 <div class="option_list" th:each="option, oStat : ${question.getOptions()}">
-                    <input type="radio" class="radio_btn" th:id="|${qStat.index}_${oStat.index}|" th:name="|option_que${qStat.index}|" th:value="${option}"/>
-                    <label th:for="|${qStat.index}_${oStat.index}|" th:text="${option}">вариант</label>
+                    <div class="option">
+                        <input type="radio" class="radio_btn" th:id="|${qStat.index}_${oStat.index}|"
+                                th:name="|option_que${qStat.index}|" th:value="${option}"/>
+                        <label th:for="|${qStat.index}_${oStat.index}|" th:text="${option}">вариант</label>
+                    </div>
                 </div>
             </section>
 
-
             <footer>
-                <div class="total_que"></div>
-
-                <button type="button" th:id="|button_${qStat.index}|" class="next_btn" th:if="${not qStat.last}">Следующий вопрос</button>
+                <div class="total_que">
+                    <span><b th:text="${qStat.count}"></b> из <b th:text="${qStat.size}"></b> вопросов</span>
+                </div>
+                <button type="button" th:id="|button_${qStat.index}|" class="next_btn" th:if="${not qStat.last}">
+                    Следующий вопрос
+                </button>
                 <input type="submit" class="submit_btn" id="send_result" th:if="${qStat.last}" value="Завершить тест">
             </footer>
         </div>
