@@ -11,7 +11,7 @@
 <body>
 
 <form class="logout_btn" th:action="@{/logout}" method="post">
-    <input type="submit" value="Выйти"/>
+    <input class="logout" type="submit" value="Выйти"/>
 </form>
 
 <div class="outer_box">
@@ -28,17 +28,17 @@
                     <div class="time_text">Осталось времени</div>
                     <div class="timer_sec"></div>
                 </div>
-                <div class="time_line"></div>
             </header>
 
             <section>
                 <div class="que_text"><span th:text="|${qStat.count}. ${question.getTitle()}|"></span></div>
-                <div class="que_image"></div>
-                <div class="option_list" th:each="option, oStat : ${question.getOptions()}">
-                    <div class="option">
+                <div class="que_image"><img th:if="${question.getImage() != null}"
+                        th:src="|@{/images/que_img/}${question.getImage()}|"></div>
+                <div class="option_list">
+                    <div class="option" th:each="option, oStat : ${question.getOptions()}">
                         <input type="radio" class="radio_btn" th:id="|${qStat.index}_${oStat.index}|"
                                 th:name="|option_que${qStat.index}|" th:value="${option}"/>
-                        <label th:for="|${qStat.index}_${oStat.index}|" th:text="${option}">вариант</label>
+                        <label th:for="|${qStat.index}_${oStat.index}|" th:text="${option}"></label>
                     </div>
                 </div>
             </section>

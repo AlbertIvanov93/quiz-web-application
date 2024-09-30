@@ -22,18 +22,18 @@ public class Result {
 
     private Date date;
 
-    //@OneToMany
-    //private List<Question> questions = new ArrayList<>(); // совместить в одну мапу
-//
-    //@ElementCollection
-    //private List<String> userAnswer = new ArrayList<>(); // совместить в одну мапу
-
     @ElementCollection
     private Map<Question, String> resultMap = new HashMap<>();
 
-    public Result(User user, Date date, Map<Question, String> resultMap) {
+    private int score;
+
+    private int maxScore;
+
+    public Result(User user, Date date, Map<Question, String> resultMap, int score, int maxScore) {
         this.user = user;
         this.date = date;
         this.resultMap = resultMap;
+        this.score = score;
+        this.maxScore = maxScore;
     }
 }

@@ -45,6 +45,15 @@ public class DataConfig {
         Topic horizontalMilling = new Topic("Горизонтально-расточные станки");
         Topic complex = new Topic("Все типы станков");
 
+        //ГРСы
+        //Заглушка
+        Set<String> options0 = new HashSet<>() {{
+            add("1");
+            add("2");
+            add("3");
+            add("4");
+        }};
+
         //Токарные станки
         Set<String> options1 = new HashSet<>() {{
             add("Станок для обработки наружных, внутренних и торцовых поверхностей деталей типа тел вращения, а также для нарезания резьбы");
@@ -208,6 +217,12 @@ public class DataConfig {
                 topicRepo.save(milling);
                 topicRepo.save(horizontalMilling);
                 topicRepo.save(complex);
+
+                //ГРСы
+                //Заглушка
+                Question grs = new Question("Угадай", horizontalMilling, options0, "3");
+                grs.setImage("1.png");
+                questionRepo.save(grs);
 
                 //Токарные станки
                 questionRepo.save(new Question("Что можно назвать токарным станком?", lathe, options1, "Все вышеперечисленное"));

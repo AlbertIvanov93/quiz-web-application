@@ -27,6 +27,8 @@ public class Question {
 
     private String answer;
 
+    private String image;
+
     public Question(String title, Topic topic, Set<String> options, String answer) {
         this.title = title;
         this.topic = topic;

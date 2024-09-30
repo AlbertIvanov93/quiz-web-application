@@ -1,6 +1,3 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Poppins: wght@200;300;400;500;600;700&display=swap');
-
 * {
     margin: 0;
     padding: 0;
@@ -13,10 +10,9 @@ body {
 }
 
 .outer_box {
-    position: absolute;
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    position: fixed;
+    top: 10%;
+    left: 35%;
     pointer-events: auto;
 }
 
@@ -55,7 +51,7 @@ body {
     margin-top: 15px;
 }
 
-.submit_btn, .logout_btn, .next_btn {
+.submit_btn, .logout , .next_btn {
     height: 40px;
     padding: 0 13px;
     font-size: 18px;
@@ -75,7 +71,7 @@ body {
     top: 10px;
 }
 
-.logout_btn:hover, .submit_btn:hover, .next_btn:hover {
+.logout:hover, .submit_btn:hover, .next_btn:hover {
     background: #840028;
 }
 
@@ -122,6 +118,12 @@ body {
     justify-content: space-between;
 }
 
+.outer_box .inner_box section,
+#result_box{
+    max-height: 600px;
+    overflow-y: scroll;
+}
+
 .outer_box .inner_box section .que_text {
     font-size: 20px;
     font-weight: 600;
@@ -144,6 +146,10 @@ body {
 }
 
 .outer_box .inner_box .option_list .option .radio_btn.disabled {
+    pointer-events: none;
+}
+
+.outer_box .inner_box .option_list .option label.disabled {
     pointer-events: none;
 }
 
@@ -251,4 +257,37 @@ body {
 #button_8.active_button_8,
 #send_result.active_send_result{
     display: block;
+}
+
+table {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    margin: 15px;
+}
+
+th {
+    border: 1px solid grey;
+    padding: 5px;
+}
+
+td {
+    border: 1px solid grey;
+    padding: 5px;
+}
+
+.second_column {
+    width: 170px;
+}
+
+.inner_box .title,
+.inner_box .user_info {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    margin: 10px;
+}
+
+.que_image img {
+    margin: 15px;
+    width: 490px;
 }

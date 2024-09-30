@@ -11,24 +11,24 @@
 <body>
 
 <form class="logout_btn" th:action="@{/logout}" method="post">
-    <input type="submit" value="Выйти"/>
+    <input class="logout" type="submit" value="Выйти"/>
 </form>
 
-<div class="result_box_outer">
+<div class="outer_box">
     <header><img th:src="@{/images/icon.png}" alt="INTRATOOL"></header>
-    <div class="result_box_inner">
-        <div class="title"> Результаты теста</div>
+    <div class="inner_box" id="result_box">
         <div class="user_info" th:text="|${user.getFirstName()} ${user.getLastName()}|"></div>
+        <div class="title" th:text="|Ваш результат ${result.getScore()} из ${result.getMaxScore()}|"></div>
 
         <table>
             <tr>
                 <th>Вопрос</th>
-                <th>Ваш ответ</th>
+                <th class="second_column">Ваш ответ</th>
             </tr>
-            <tr th:each="res : ${result.getResultMap()}">
+            <tr  th:each="res : ${result.getResultMap()}">
                 <td th:text="${res.getKey().getTitle()}"></td>
-                <td th:text="${res.getValue()}"
-                    th:styleappend="${res.getKey().getAnswer() == res.getValue() ? 'background: green' : 'background: red'}"></td>
+                <td class="second_column" th:text="${res.getValue()}"
+                    th:styleappend="${res.getKey().getAnswer() == res.getValue() ? 'background: #B4D5A1' : 'background: #db99ad'}"></td>
             </tr>
         </table>
     </div>

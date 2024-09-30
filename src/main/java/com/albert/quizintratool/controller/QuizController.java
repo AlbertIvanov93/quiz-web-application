@@ -48,28 +48,35 @@ public class QuizController {
     }
 
     @PostMapping
-    public String getResult(@RequestParam(name = "option_que0", required = false) String firstAns,
-                            @RequestParam(name = "option_que1", required = false) String secondAns,
-                            @RequestParam(name = "option_que2", required = false) String thirdAns,
-                            @RequestParam(name = "option_que3", required = false) String forthAns,
-                            @RequestParam(name = "option_que4", required = false) String fifthAns,
-                            @RequestParam(name = "option_que5", required = false) String sixthAns,
-                            @RequestParam(name = "option_que6", required = false) String seventhAns,
-                            @RequestParam(name = "option_que7", required = false) String eighthAns,
-                            @RequestParam(name = "option_que8", required = false) String ninthAns,
-                            @RequestParam(name = "option_que9", required = false) String tensAns,
+    public String getResult(@RequestParam(name = "option_que0", defaultValue = "Время вышло") String firstAns,
+                            @RequestParam(name = "option_que1", defaultValue = "Время вышло") String secondAns,
+                            @RequestParam(name = "option_que2", defaultValue = "Время вышло") String thirdAns,
+                            @RequestParam(name = "option_que3", defaultValue = "Время вышло") String forthAns,
+                            @RequestParam(name = "option_que4", defaultValue = "Время вышло") String fifthAns,
+                            @RequestParam(name = "option_que5", defaultValue = "Время вышло") String sixthAns,
+                            @RequestParam(name = "option_que6", defaultValue = "Время вышло") String seventhAns,
+                            @RequestParam(name = "option_que7", defaultValue = "Время вышло") String eighthAns,
+                            @RequestParam(name = "option_que8", defaultValue = "Время вышло") String ninthAns,
+                            @RequestParam(name = "option_que9", defaultValue = "Время вышло") String tensAns,
                             Model model) {
         User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
         List<Question> questions = (List<Question>) model.getAttribute("questions");
         Map<Question,String> resultMap = new HashMap<>();
         List<String> userAnswer = List.of(firstAns, secondAns, thirdAns, forthAns,
                 fifthAns, sixthAns, seventhAns, eighthAns, ninthAns, tensAns);
-        for (int i = 0; i < 10; i++) {
-            resultMap.put(questions.get(i), userAnswer.get(i));
+
+        int score = 0;
+        int maxScore = questions.size();
+        for (int i = 0; i < questions.size(); i++) {
+            Question currentQuestion = questions.get(i);
+            String currentAnswer = userAnswer.get(i);
+            resultMap.put(currentQuestion, currentAnswer);
+            if (currentQuestion.getAnswer().equals(currentAnswer)) {
+                score++;
+            }
         }
 
-        Result result = new Result(user, new Date(), resultMap);
+        Result result = new Result(user, new Date(), resultMap, score, maxScore);
         resultRepository.save(result);
         return "redirect:/result/?id=" + result.getId();
     }
