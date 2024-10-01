@@ -23,6 +23,9 @@ public class Result {
     private Date date;
 
     @ElementCollection
+    @CollectionTable(name = "RESULT_MAP", joinColumns = @JoinColumn(name = "RESULT_ID"))
+    @MapKeyColumn(name = "QUESTION_ID")
+    @Column(name = "USER_ANSWER")
     private Map<Question, String> resultMap = new HashMap<>();
 
     private int score;

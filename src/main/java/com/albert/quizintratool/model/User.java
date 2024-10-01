@@ -11,7 +11,7 @@ import java.util.*;
 
 @Entity
 @Data
-@Table(name = "intra_users")
+@Table(name = "intra_user")
 @NoArgsConstructor
 public class User implements UserDetails {
 

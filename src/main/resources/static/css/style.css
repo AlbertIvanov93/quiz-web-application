@@ -291,3 +291,29 @@ td {
     margin: 15px;
     width: 490px;
 }
+
+.back_to_home {
+    font-size: 18px;
+    font-weight: 400;
+    width: 130px;
+    height: 40px;
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 10px;
+    outline: none;
+    border: 1px solid #840028;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #a60132;
+    position: absolute;
+    right: 100px;
+    top: 10px;
+}
+
+
+.back_to_home:hover {
+    background: #840028;
+}

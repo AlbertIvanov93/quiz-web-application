@@ -5,7 +5,8 @@ const timeOffs = document.querySelectorAll(".time_text");
 const radioLabels = document.querySelectorAll("label");
 
 let currentQuestion = 0;
-let timer = 15;
+let questionNumber = timeCounts.length;
+let timeToAnswer = 60;
 let interval;
 
 showFirstQuestion();
@@ -17,7 +18,8 @@ function showFirstQuestion() {
     firstQuestion.classList.add("active_question_0");
     let radio = createNewArray(radioBtns, 0);
     let radioLabel = createNewArray(radioLabels, 0);
-    startTimer(timer, timeCounts[0], timeOffs[0], radio, nextBtns[0], radioLabel);
+    //startTimer(timer, timeCounts[0], timeOffs[0], radio, nextBtns[0], radioLabel);
+    startTimer(0);
 }
 
 function showNextQuestion() {
@@ -34,9 +36,10 @@ function nextBtnOnClick() {
     currentQuestion = currentQuestion + 1;
     const next_question_box = document.getElementById("question_" + currentQuestion);
     next_question_box.classList.add("active_question_" + currentQuestion);
-    let radio = createNewArray(radioBtns, currentQuestion * 4);
-    let radioLabel = createNewArray(radioLabels, currentQuestion * 4);
-    startTimer(timer, timeCounts[currentQuestion], timeOffs[currentQuestion], radio, nextBtns[currentQuestion], radioLabel);
+    //let radio = createNewArray(radioBtns, currentQuestion * 4);
+    //let radioLabel = createNewArray(radioLabels, currentQuestion * 4);
+    //startTimer(timer, timeCounts[currentQuestion], timeOffs[currentQuestion], radio, nextBtns[currentQuestion], radioLabel);
+    startTimer(currentQuestion);
 }
 
 function showNextButtonAfterChose() {
@@ -63,7 +66,7 @@ function lastRadioButtonOnClick() {
     submitButton.classList.add("active_send_result");
 }
 
-function startTimer(time, timeCount, timeOff, radio, next_btn, radioLabels) {
+/*function startTimer(time, timeCount, timeOff, radio, next_btn, radioLabels) {
     interval = setInterval(timer, 1000);
 
     function timer() {
@@ -87,6 +90,46 @@ function startTimer(time, timeCount, timeOff, radio, next_btn, radioLabels) {
             }
 
             next_btn.style.display = "block";
+        }
+    }
+}*/
+
+
+function startTimer(index) {
+    let time = timeToAnswer;
+    let timeCount = timeCounts[index];
+    let timeOff = timeOffs[index];
+    let radio = createNewArray(radioBtns, index * 4);
+    let nextBtn = nextBtns[index];
+    let radioLabels = createNewArray(radioBtns, index * 4)
+
+    interval = setInterval(timer, 1000);
+
+    function timer() {
+        timeCount.textContent = time;
+        time--;
+
+        if (time < 9) {
+            let addZero = timeCount.textContent;
+            timeCount.textContent = "0" + addZero;
+        }
+        if (time < 0) {
+            clearInterval(interval);
+            timeCount.textContent = "00";
+            timeOff.textContent = "Время вышло";
+
+            for (let i = 0; i < radio.length; i++) {
+                radio[i].classList.add("disabled");
+                radio[i].readOnly = true;
+                radioLabels[i].classList.add("disabled");
+                radioLabels[i].readOnly = true;
+            }
+
+            if (index == questionNumber - 1) {
+                lastRadioButtonOnClick();
+            } else {
+                nextBtn.style.display = "block";
+            }
         }
     }
 }

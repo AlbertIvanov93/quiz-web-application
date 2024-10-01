@@ -43,7 +43,7 @@ public class DataConfig {
         Topic lathe = new Topic("Токарные станки");
         Topic milling = new Topic("Фрезерные станки");
         Topic horizontalMilling = new Topic("Горизонтально-расточные станки");
-        Topic complex = new Topic("Все типы станков");
+        Topic complex = new Topic("Общий тест");
 
         //ГРСы
         //Заглушка

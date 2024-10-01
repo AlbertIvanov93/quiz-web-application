@@ -22,11 +22,13 @@ public class Question {
     private Topic topic;
 
     @ElementCollection
-    @Column(name = "OPTION")
+    @CollectionTable(name = "OPTION")
+    @Column(name = "NAME")
     private Set<String> options = new HashSet<>();
 
     private String answer;
 
+    @Column(name = "IMAGE_NAME")
     private String image;
 
     public Question(String title, Topic topic, Set<String> options, String answer) {

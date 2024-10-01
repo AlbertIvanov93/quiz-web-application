@@ -13,4 +13,7 @@ public interface QuestionRepository extends CrudRepository<Question, String> {
 
     @Query("from Question q where q.topic.id = :id order by random() limit 10")
     List<Question> findByTopicIdOrderByRandomLimit10(@Param("id") Long topicId);
+
+    @Query("from Question q order by random() limit 10")
+    List<Question> findAllOrderByRandomLimit10();
 }

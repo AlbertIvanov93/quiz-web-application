@@ -12,10 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Controller
 @RequestMapping("/quiz/")
@@ -39,6 +36,7 @@ public class QuizController {
     public String showQuiz(@RequestParam(name = "topic_id") Long topicId,
                            Model model) {
         // если тема есть, то обновить модель и вернуть страницу квиза
+        System.out.println(topicId);
         if (topicRepository.findById(topicId).isPresent()) {
             addAttributeToModel(topicId, model);
             return "quiz";
@@ -81,11 +79,16 @@ public class QuizController {
         return "redirect:/result/?id=" + result.getId();
     }
 
-    @ModelAttribute(name = "questions")
-    private List<Question> addAttributeToModel(Long topicId, Model model) {
+    private void addAttributeToModel(Long topicId, Model model) {
+        System.out.println("зашли");
+        System.out.println(topicId);
         String modelQuestionsName = "questions";
-        List<Question> questions = questionRepository.findByTopicIdOrderByRandomLimit10(topicId);
-        model.addAttribute("questions", questions);
-        return questions;
+        List<Question> questions;
+        if (topicId.equals(topicRepository.findByName("Общий тест").getId())) {
+            questions = questionRepository.findAllOrderByRandomLimit10();
+        } else {
+            questions = questionRepository.findByTopicIdOrderByRandomLimit10(topicId);
+        }
+        model.addAttribute(modelQuestionsName, questions);
     }
 }
