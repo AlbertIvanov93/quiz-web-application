@@ -1,6 +1,5 @@
 package com.albert.quizintratool.controller;
 
-import com.albert.quizintratool.model.User;
 import com.albert.quizintratool.repository.ResultRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,8 +22,8 @@ public class ResultController {
 
     @GetMapping
     public String showResult(@RequestParam Long id, Model model) {
-        model.addAttribute("result", resultRepository.findById(id).get());
-        model.addAttribute("user", (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        model.addAttribute("result", resultRepository.findById(id).orElseThrow());
+        model.addAttribute("user", SecurityContextHolder.getContext().getAuthentication().getPrincipal());
         return "result";
     }
 }

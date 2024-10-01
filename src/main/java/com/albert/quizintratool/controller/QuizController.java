@@ -6,7 +6,8 @@ import com.albert.quizintratool.model.User;
 import com.albert.quizintratool.repository.QuestionRepository;
 import com.albert.quizintratool.repository.ResultRepository;
 import com.albert.quizintratool.repository.TopicRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.albert.quizintratool.service.MailSenderService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,26 +18,18 @@ import java.util.*;
 @Controller
 @RequestMapping("/quiz/")
 @SessionAttributes("questions")
+@RequiredArgsConstructor
 public class QuizController {
 
     private final TopicRepository topicRepository;
     private final QuestionRepository questionRepository;
     private final ResultRepository resultRepository;
-
-
-    @Autowired
-    public QuizController(TopicRepository topicRepository, QuestionRepository questionRepository, ResultRepository resultRepository) {
-        this.topicRepository = topicRepository;
-        this.questionRepository = questionRepository;
-        this.resultRepository = resultRepository;
-    }
-
+    private final MailSenderService mailSenderService;
 
     @GetMapping
     public String showQuiz(@RequestParam(name = "topic_id") Long topicId,
                            Model model) {
         // если тема есть, то обновить модель и вернуть страницу квиза
-        System.out.println(topicId);
         if (topicRepository.findById(topicId).isPresent()) {
             addAttributeToModel(topicId, model);
             return "quiz";
@@ -76,12 +69,11 @@ public class QuizController {
 
         Result result = new Result(user, new Date(), resultMap, score, maxScore);
         resultRepository.save(result);
+        mailSenderService.send(result.toString());
         return "redirect:/result/?id=" + result.getId();
     }
 
     private void addAttributeToModel(Long topicId, Model model) {
-        System.out.println("зашли");
-        System.out.println(topicId);
         String modelQuestionsName = "questions";
         List<Question> questions;
         if (topicId.equals(topicRepository.findByName("Общий тест").getId())) {
