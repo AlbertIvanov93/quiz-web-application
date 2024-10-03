@@ -23,6 +23,7 @@
         <div class="topics" th:each="topic : ${topics}">
             <a class="topic" th:href="@{quiz/(topic_id=${topic.id})}" th:text="${topic.name}">TOPIC</a>
         </div>
+        <a class="topic" th:href="@{/admin}" th:if="${userRole.contains(admin)}" >Страница админа</a>
     </div>
 </div>
 </body>

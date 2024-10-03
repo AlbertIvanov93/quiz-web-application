@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>INTRATOOL тестирование</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+</head>
+<body>
+
+<a class="back_to_home" th:href="@{/}" >Выбрать тест</a>
+<a class="back_to_admin" th:href="@{/admin}" >Назад</a>
+<form class="logout_btn" th:action="@{/logout}" method="post">
+    <input class="logout" type="submit" value="Выйти"/>
+</form>
+
+<table>
+    <tr th:each="topic : ${topics}">
+        <td th:text="${topic.getName()}"></td>
+    </tr>
+</table>
+
+
+</body>
+</html>

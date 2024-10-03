@@ -7,29 +7,77 @@ import com.albert.quizintratool.model.User;
 import com.albert.quizintratool.repository.QuestionRepository;
 import com.albert.quizintratool.repository.TopicRepository;
 import com.albert.quizintratool.repository.UserRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 
 
 @Configuration
+@Slf4j
 public class DataConfig {
 
     @Bean
     public CommandLineRunner userLoader(UserRepository userRepository, PasswordEncoder encoder) {
-        User hayrulin = new User("artur","Артур", "Хайрулин", encoder.encode("1234"), Role.USER);
-        User admin = new User("admin","admin", "admin", encoder.encode("password"), Role.ADMIN);
-        User test = new User("test","test", "test", encoder.encode("1234"), Role.USER);
-        test.getRoles().add(Role.ADMIN);
+        String rootPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+        String propsFileName = rootPath + "security.properties";
+        Properties appProps = new Properties();
+        try (FileInputStream input = new FileInputStream(propsFileName)) {
+            appProps.load(input);
+        } catch (IOException e) {
+            log.error(e.getMessage());
+        }
+
+        User shkatov = new User(appProps.getProperty("user.login.shkatov"), "Михаил", "Шкатов", encoder.encode(appProps.getProperty("user.password.shkatov")), Role.USER);
+        User eliseev = new User(appProps.getProperty("user.login.eliseev"), "Алексей", "Елисеев", encoder.encode(appProps.getProperty("user.password.eliseev")), Role.USER);
+        User kraynov = new User(appProps.getProperty("user.login.kraynov"), "Андрей", "Крайнов", encoder.encode(appProps.getProperty("user.password.kraynov")), Role.USER);
+        User lyapinskiy = new User(appProps.getProperty("user.login.lyapinskiy"), "Антон", "Ляпинский", encoder.encode(appProps.getProperty("user.password.lyapinskiy")), Role.USER);
+        User romantsov = new User(appProps.getProperty("user.login.romantsov"), "Евгений", "Романцов", encoder.encode(appProps.getProperty("user.password.romantsov")), Role.USER);
+        User fedorov = new User(appProps.getProperty("user.login.fedorov"), "Алексей", "Федоров", encoder.encode(appProps.getProperty("user.password.fedorov")), Role.USER);
+        User frolova = new User(appProps.getProperty("user.login.frolova"), "Анна", "Фролова", encoder.encode(appProps.getProperty("user.password.frolova")), Role.USER);
+        User khrustalev = new User(appProps.getProperty("user.login.khrustalev"), "Олег", "Хрусталев", encoder.encode(appProps.getProperty("user.password.khrustalev")), Role.USER);
+        User bugaets = new User(appProps.getProperty("user.login.bugaets"), "Антон", "Бугаец", encoder.encode(appProps.getProperty("user.password.bugaets")), Role.USER);
+        User vlasova = new User(appProps.getProperty("user.login.vlasova"), "Мария", "Власова", encoder.encode(appProps.getProperty("user.password.vlasova")), Role.USER);
+        User mikitenko = new User(appProps.getProperty("user.login.mikitenko"), "Анатолий", "Микитенко", encoder.encode(appProps.getProperty("user.password.mikitenko")), Role.USER);
+        User motornyy = new User(appProps.getProperty("user.login.motornyy"), "Владимир", "Моторный", encoder.encode(appProps.getProperty("user.password.motornyy")), Role.USER);
+        User rodionov = new User(appProps.getProperty("user.login.rodionov"), "Дмитрий", "Родионов", encoder.encode(appProps.getProperty("user.password.rodionov")), Role.USER);
+        User ryabova = new User(appProps.getProperty("user.login.ryabova"), "Юлия", "Рябова", encoder.encode(appProps.getProperty("user.password.ryabova")), Role.USER);
+        User hayrullin = new User(appProps.getProperty("user.login.hayrullin"),"Артур", "Хайруллин", encoder.encode(appProps.getProperty("user.password.hayrullin")), Role.USER);
+        User shvaybovich = new User(appProps.getProperty("user.login.shvaybovich"), "Людмила", "Швайбович", encoder.encode(appProps.getProperty("user.password.shvaybovich")), Role.USER);
+        User shevchenko = new User(appProps.getProperty("user.login.shevchenko"), "Алексей", "Шевченко", encoder.encode(appProps.getProperty("user.password.shevchenko")), Role.USER);
+        User admin = new User(appProps.getProperty("user.login.admin"), "admin", "admin", encoder.encode(appProps.getProperty("user.password.admin")), Role.ADMIN);
+        User test = new User(appProps.getProperty("user.login.test"), "test", "test", encoder.encode(appProps.getProperty("user.password.test")), Role.USER);
+
 
         return new CommandLineRunner() {
             @Override
             public void run(String... args) throws Exception {
-                userRepository.save(hayrulin);
+                userRepository.save(shkatov);
+                userRepository.save(eliseev);
+                userRepository.save(kraynov);
+                userRepository.save(lyapinskiy);
+                userRepository.save(romantsov);
+                userRepository.save(fedorov);
+                userRepository.save(frolova);
+                userRepository.save(khrustalev);
+                userRepository.save(bugaets);
+                userRepository.save(vlasova);
+                userRepository.save(mikitenko);
+                userRepository.save(motornyy);
+                userRepository.save(rodionov);
+                userRepository.save(ryabova);
+                userRepository.save(hayrullin);
+                userRepository.save(shvaybovich);
+                userRepository.save(shevchenko);
                 userRepository.save(admin);
                 userRepository.save(test);
             }
