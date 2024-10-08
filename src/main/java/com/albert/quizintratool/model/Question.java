@@ -37,4 +37,12 @@ public class Question {
         this.options = options;
         this.answer = answer;
     }
+
+    public Question(String title, Topic topic, Set<String> options, String answer, String image) {
+        this.title = title;
+        this.topic = topic;
+        this.options = options;
+        this.answer = answer;
+        this.image = image;
+    }
 }

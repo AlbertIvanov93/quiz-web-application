@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 public class TopicsController {
 
-    private TopicRepository topicRepository;
+    private final TopicRepository topicRepository;
 
     @GetMapping
     public String getTopicsPage() {

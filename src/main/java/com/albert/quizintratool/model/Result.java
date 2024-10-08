@@ -56,9 +56,14 @@ public class Result {
         strB.append(" правильных ответов из ");
         strB.append(maxScore);
         strB.append("\n");
+        strB.append("ID результата: ");
+        strB.append(getId());
+        strB.append("\n");
         strB.append("\n");
         resultMap.forEach((question, answer) -> {
             strB.append("Вопрос: ");
+            strB.append(question.getId());
+            strB.append(". ");
             strB.append(question.getTitle());
             strB.append("\n");
             strB.append("Ответ: ");

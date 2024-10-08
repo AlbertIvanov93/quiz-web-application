@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>INTRATOOL тестирование</title>
+    <link rel="icon" th:href="@{/images/favicon.ico}">
     <link rel="stylesheet" th:href="@{/css/style.css}"/>
 </head>
 <body>
@@ -37,7 +38,7 @@
                 <div class="option_list">
                     <div class="option" th:each="option, oStat : ${question.getOptions()}">
                         <input type="radio" class="radio_btn" th:id="|${qStat.index}_${oStat.index}|"
-                                th:name="|option_que${qStat.index}|" th:value="${option}"/>
+                                th:name="|answer[${qStat.index}]|" th:value="${option}"/>
                         <label th:for="|${qStat.index}_${oStat.index}|" th:text="${option}"></label>
                     </div>
                 </div>

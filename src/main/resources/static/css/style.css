@@ -206,55 +206,19 @@ body {
     font-size: 17px;
     user-select: none;
 }
-
-#question_0,
-#question_1,
-#question_2,
-#question_3,
-#question_4,
-#question_5,
-#question_6,
-#question_7,
-#question_8,
-#question_9 {
+[id^='question_'] {
     display: none;
 }
-
-#question_0.active_question_0,
-#question_1.active_question_1,
-#question_2.active_question_2,
-#question_3.active_question_3,
-#question_4.active_question_4,
-#question_5.active_question_5,
-#question_6.active_question_6,
-#question_7.active_question_7,
-#question_8.active_question_8,
-#question_9.active_question_9 {
+[id^='question_'].active_question {
     display: block;
 }
 
-#button_0,
-#button_1,
-#button_2,
-#button_3,
-#button_4,
-#button_5,
-#button_6,
-#button_7,
-#button_8,
+[id^='button_'],
 #send_result{
     display: none;
 }
 
-#button_0.active_button_0,
-#button_1.active_button_1,
-#button_2.active_button_2,
-#button_3.active_button_3,
-#button_4.active_button_4,
-#button_5.active_button_5,
-#button_6.active_button_6,
-#button_7.active_button_7,
-#button_8.active_button_8,
+[id^='button_'].active_button,
 #send_result.active_send_result{
     display: block;
 }
