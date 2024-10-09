@@ -8,13 +8,11 @@ import com.albert.quizintratool.repository.QuestionRepository;
 import com.albert.quizintratool.repository.TopicRepository;
 import com.albert.quizintratool.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashSet;
@@ -36,31 +34,40 @@ public class DataConfig {
         } catch (IOException e) {
             log.error(e.getMessage());
         }
+        User eliseev = new User(appProps.getProperty("user.login.eliseev"), "Алексей", "Елисеев", encoder.encode(appProps.getProperty("user.password.eliseev")), Role.USER);
+        User kraynov = new User(appProps.getProperty("user.login.kraynov"), "Андрей", "Крайнов", encoder.encode(appProps.getProperty("user.password.kraynov")), Role.USER);
+        User romantsov = new User(appProps.getProperty("user.login.romantsov"), "Евгений", "Романцов", encoder.encode(appProps.getProperty("user.password.romantsov")), Role.USER);
+        User fedorov = new User(appProps.getProperty("user.login.fedorov"), "Алексей", "Федоров", encoder.encode(appProps.getProperty("user.password.fedorov")), Role.USER);
+        User frolova = new User(appProps.getProperty("user.login.frolova"), "Анна", "Фролова", encoder.encode(appProps.getProperty("user.password.frolova")), Role.USER);
+        User khrustalev = new User(appProps.getProperty("user.login.khrustalev"), "Олег", "Хрусталев", encoder.encode(appProps.getProperty("user.password.khrustalev")), Role.USER);
+        User alimbaev = new User(appProps.getProperty("user.login.alimbaev"), "Курман", "Алимбаев", encoder.encode(appProps.getProperty("user.password.alimbaev")), Role.USER);
+        User akhmetov = new User(appProps.getProperty("user.login.akhmetov"), "Владимир", "Ахметов", encoder.encode(appProps.getProperty("user.password.akhmetov")), Role.USER);
         User bugaets = new User(appProps.getProperty("user.login.bugaets"), "Антон", "Бугаец", encoder.encode(appProps.getProperty("user.password.bugaets")), Role.USER);
         User vlasova = new User(appProps.getProperty("user.login.vlasova"), "Мария", "Власова", encoder.encode(appProps.getProperty("user.password.vlasova")), Role.USER);
-        User eliseev = new User(appProps.getProperty("user.login.eliseev"), "Алексей", "Елисеев", encoder.encode(appProps.getProperty("user.password.eliseev")), Role.USER);
+        User geychik = new User(appProps.getProperty("user.login.geychik"), "Ярослав", "Гейчик", encoder.encode(appProps.getProperty("user.password.geychik")), Role.USER);
+        User dubenskiy = new User(appProps.getProperty("user.login.dubenskiy"), "Владислав", "Дубенский", encoder.encode(appProps.getProperty("user.password.dubenskiy")), Role.USER);
+        User medvedeva = new User(appProps.getProperty("user.login.medvedeva"), "Ольга", "Медведева", encoder.encode(appProps.getProperty("user.password.medvedeva")), Role.USER);
+        User ivliev = new User(appProps.getProperty("user.login.ivliev"), "Игорь", "Ивлиев", encoder.encode(appProps.getProperty("user.password.ivliev")), Role.USER);
         User ignateva = new User(appProps.getProperty("user.login.ignateva"), "Анастасия", "Игнатьева", encoder.encode(appProps.getProperty("user.password.ignateva")), Role.USER);
-        User kraynov = new User(appProps.getProperty("user.login.kraynov"), "Андрей", "Крайнов", encoder.encode(appProps.getProperty("user.password.kraynov")), Role.USER);
         User lyapinskiy = new User(appProps.getProperty("user.login.lyapinskiy"), "Антон", "Ляпинский", encoder.encode(appProps.getProperty("user.password.lyapinskiy")), Role.USER);
         User mikitenko = new User(appProps.getProperty("user.login.mikitenko"), "Анатолий", "Микитенко", encoder.encode(appProps.getProperty("user.password.mikitenko")), Role.USER);
         User motornyy = new User(appProps.getProperty("user.login.motornyy"), "Владимир", "Моторный", encoder.encode(appProps.getProperty("user.password.motornyy")), Role.USER);
+        User mukhametzyanov = new User(appProps.getProperty("user.login.mukhametzyanov"), "Рашид", "Мухаметзянов", encoder.encode(appProps.getProperty("user.password.mukhametzyanov")), Role.USER);
+        User neupokoev = new User(appProps.getProperty("user.login.neupokoev"), "Александр", "Неупокоев", encoder.encode(appProps.getProperty("user.password.neupokoev")), Role.USER);
+        User novikov = new User(appProps.getProperty("user.login.novikov"), "Владислав", "Новиков", encoder.encode(appProps.getProperty("user.password.novikov")), Role.USER);
+        User palkin = new User(appProps.getProperty("user.login.palkin"), "Владимир", "Палкин", encoder.encode(appProps.getProperty("user.password.palkin")), Role.USER);
         User rodionov = new User(appProps.getProperty("user.login.rodionov"), "Дмитрий", "Родионов", encoder.encode(appProps.getProperty("user.password.rodionov")), Role.USER);
-        User romantsov = new User(appProps.getProperty("user.login.romantsov"), "Евгений", "Романцов", encoder.encode(appProps.getProperty("user.password.romantsov")), Role.USER);
         User ryabova = new User(appProps.getProperty("user.login.ryabova"), "Юлия", "Рябова", encoder.encode(appProps.getProperty("user.password.ryabova")), Role.USER);
-        User fedorov = new User(appProps.getProperty("user.login.fedorov"), "Алексей", "Федоров", encoder.encode(appProps.getProperty("user.password.fedorov")), Role.USER);
-        User frolova = new User(appProps.getProperty("user.login.frolova"), "Анна", "Фролова", encoder.encode(appProps.getProperty("user.password.frolova")), Role.USER);
+        User slepenkov = new User(appProps.getProperty("user.login.slepenkov"), "Анатолий", "Слепенков", encoder.encode(appProps.getProperty("user.password.slepenkov")), Role.USER);
+        User smirnov = new User(appProps.getProperty("user.login.smirnov"), "Сергей", "Смирнов", encoder.encode(appProps.getProperty("user.password.smirnov")), Role.USER);
         User hayrullin = new User(appProps.getProperty("user.login.hayrullin"),"Артур", "Хайруллин", encoder.encode(appProps.getProperty("user.password.hayrullin")), Role.USER);
-        User khrustalev = new User(appProps.getProperty("user.login.khrustalev"), "Олег", "Хрусталев", encoder.encode(appProps.getProperty("user.password.khrustalev")), Role.USER);
+        User shakhov = new User(appProps.getProperty("user.login.shakhov"), "Артем", "Шахов", encoder.encode(appProps.getProperty("user.password.shakhov")), Role.USER);
         User shvaybovich = new User(appProps.getProperty("user.login.shvaybovich"), "Людмила", "Швайбович", encoder.encode(appProps.getProperty("user.password.shvaybovich")), Role.USER);
         User shevchenko = new User(appProps.getProperty("user.login.shevchenko"), "Алексей", "Шевченко", encoder.encode(appProps.getProperty("user.password.shevchenko")), Role.USER);
         User shkatov = new User(appProps.getProperty("user.login.shkatov"), "Михаил", "Шкатов", encoder.encode(appProps.getProperty("user.password.shkatov")), Role.USER);
-        User geychik = new User(appProps.getProperty("user.login.geychik"), "Ярослав", "Гейчик", encoder.encode(appProps.getProperty("user.password.geychik")), Role.USER);
-        User dubenskiy = new User(appProps.getProperty("user.login.dubenskiy"), "Владислав", "Дубенский", encoder.encode(appProps.getProperty("user.password.dubenskiy")), Role.USER);
-        User ivliev = new User(appProps.getProperty("user.login.ivliev"), "Игорь", "Ивлиев", encoder.encode(appProps.getProperty("user.password.ivliev")), Role.USER);
-        User neupokoev = new User(appProps.getProperty("user.login.neupokoev"), "Александр", "Неупокоев", encoder.encode(appProps.getProperty("user.password.neupokoev")), Role.USER);
-        User novikov = new User(appProps.getProperty("user.login.novikov"), "Владислав", "Новиков", encoder.encode(appProps.getProperty("user.password.novikov")), Role.USER);
-        User smirnov = new User(appProps.getProperty("user.login.smirnov"), "Сергей", "Смирнов", encoder.encode(appProps.getProperty("user.password.smirnov")), Role.USER);
-        User shakhov = new User(appProps.getProperty("user.login.shakhov"), "Артем", "Шахов", encoder.encode(appProps.getProperty("user.password.shakhov")), Role.USER);
+        User shlapak = new User(appProps.getProperty("user.login.shlapak"), "Екатерина", "Шлапак", encoder.encode(appProps.getProperty("user.password.shlapak")), Role.USER);
+        User shumaev = new User(appProps.getProperty("user.login.shumaev"), "Алексей", "Шумаев", encoder.encode(appProps.getProperty("user.password.shumaev")), Role.USER);
+        User yushin = new User(appProps.getProperty("user.login.yushin"), "Андрей", "Юшин", encoder.encode(appProps.getProperty("user.password.yushin")), Role.USER);
 
         User admin = new User(appProps.getProperty("user.login.admin"), "admin", "admin", encoder.encode(appProps.getProperty("user.password.admin")), Role.ADMIN);
         User test = new User(appProps.getProperty("user.login.test"), "test", "test", encoder.encode(appProps.getProperty("user.password.test")), Role.USER);
@@ -92,6 +99,15 @@ public class DataConfig {
                 userRepository.save(novikov);
                 userRepository.save(smirnov);
                 userRepository.save(shakhov);
+                userRepository.save(alimbaev);
+                userRepository.save(akhmetov);
+                userRepository.save(medvedeva);
+                userRepository.save(mukhametzyanov);
+                userRepository.save(palkin);
+                userRepository.save(slepenkov);
+                userRepository.save(shlapak);
+                userRepository.save(shumaev);
+                userRepository.save(yushin);
 
                 userRepository.save(admin);
                 userRepository.save(test);
@@ -292,7 +308,6 @@ public class DataConfig {
             add("SIECC");
             add("OKUMA");
         }};
-
 
         //Фрезерные станки
         Set<String> milling1 = new HashSet<>() {{
