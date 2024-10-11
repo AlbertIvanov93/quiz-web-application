@@ -22,26 +22,28 @@ public class Result {
     @ManyToOne
     private User user;
 
-    private Date date;
+    private Date endDate;
+
+    private Date beginDate;
 
     @ElementCollection
     @CollectionTable(name = "RESULT_MAP", joinColumns = @JoinColumn(name = "RESULT_ID"))
-    //@MapKeyColumn(name = "QUESTION_ID")
     @Column(name = "USER_ANSWER")
     private Map<Question, String> resultMap = new HashMap<>();
 
     private int score;
 
     private int maxScore;
-    public Result(User user, Date date, Map<Question, String> resultMap, int score, int maxScore) {
+    public Result(User user, Date endDate, Date beginDate, Map<Question, String> resultMap, int score, int maxScore) {
         this.user = user;
-        this.date = date;
+        this.endDate = endDate;
+        this.beginDate = beginDate;
         this.resultMap = resultMap;
         this.score = score;
         this.maxScore = maxScore;
     }
 
-    private static SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
     @Override
     public String toString() {
@@ -50,7 +52,9 @@ public class Result {
         strB.append(" ");
         strB.append(user.getLastName());
         strB.append("\n");
-        strB.append(formatter.format(date));
+        strB.append(formatter.format(beginDate));
+        strB.append(" ");
+        strB.append(formatter.format(endDate));
         strB.append("\n");
         strB.append(score);
         strB.append(" правильных ответов из ");

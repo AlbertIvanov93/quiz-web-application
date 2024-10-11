@@ -21,7 +21,7 @@ public class Question {
     @ManyToOne
     private Topic topic;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "OPTION")
     @Column(name = "NAME")
     private Set<String> options = new HashSet<>();

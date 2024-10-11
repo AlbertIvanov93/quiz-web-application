@@ -13,18 +13,13 @@
 
 <a class="back_to_home" th:href="@{/}" >Выбрать тест</a>
 <a class="back_to_admin" th:href="@{/admin}" >Назад</a>
-<form class="logout_btn" th:action="@{/logout}" method="post">
+<form class="logout_btn" th:action="@{/logout}" method="POST">
     <input class="logout" type="submit" value="Выйти"/>
 </form>
 
-<table>
-    <tr th:each="topic : ${topics}">
-        <td th:text="${topic.getName()}"></td>
-        <td>Редактировать</td>
-        <td>Удалить</td>
-    </tr>
-    <tr>Добавить</tr>
-</table>
+<form th:action="@{/userresults/download}" method="GET">
+    <input type="submit" value="Загрузить результаты"/>
+</form>
 
 
 </body>

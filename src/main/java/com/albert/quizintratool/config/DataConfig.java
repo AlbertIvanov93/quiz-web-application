@@ -334,7 +334,7 @@ public class DataConfig {
         Set<String> milling4 = new HashSet<>() {{
             add("Цилиндрической");
             add("Фасонной");
-            add("Отрезной");
+            add("Гипоидной");
             add("Дисковой");
         }};
 
@@ -489,7 +489,7 @@ public class DataConfig {
                 questionRepo.save(new Question("Назовите компанию из Китая, с которой мы сотрудничаем по токарным станкам", lathe, lathe10, "DMTC"));
                 questionRepo.save(new Question("Как называется набор сменных зубчатых шестерен в токарном станке?", lathe, lathe11, "Гитара"));
                 questionRepo.save(new Question("Как называется устройство с инструментами в токарном станке?", lathe, lathe12, "Револьверная голова"));
-                questionRepo.save(new Question("К классу валов относят детали, у которых:", lathe, lathe13, "Длина значительно меньше диаметра"));
+                questionRepo.save(new Question("К классу валов относят детали, у которых:", lathe, lathe13, "Длина значительно больше диаметра"));
                 questionRepo.save(new Question("Что такое барфидер?", lathe, lathe14, "Устройство автоматической подачи прутка через шпиндель в токарный станок с ЧПУ"));
                 questionRepo.save(new Question("Под каким номером изображен токарный станок с ЧПУ", lathe, lathe15, "1", "1.jpg"));
                 questionRepo.save(new Question("Какой китайский партнер производит 5-осевые токарно-фрезерные станки?", lathe, lathe16, "DESUN-SEIKI"));
@@ -510,7 +510,7 @@ public class DataConfig {
                 questionRepo.save(new Question("Что можно назвать фрезерным станком?", milling, milling1, "Станок, у которого происходит вращательное движение фрезы с одновременным поступательным перемещением (подачей) обрабатываемой детали"));
                 questionRepo.save(new Question("Назовите основные параметры фрезерного станка", milling, milling2, "Все вышеперечисленное"));
                 questionRepo.save(new Question("Назовите главное движение во фрезерном станке", milling, milling3, "Вращение шпинделя"));
-                questionRepo.save(new Question("Какой фрезы не бывает?", milling, milling4, "Отрезной"));
+                questionRepo.save(new Question("Какой фрезы не бывает?", milling, milling4, "Гипоидной"));
                 questionRepo.save(new Question("Как будет называться фрезерный станок с ЧПУ с накладным поворотным столом?", milling, milling5, "3+1"));
                 questionRepo.save(new Question("Конус шпинделя это?", milling, milling6, "Тип крепления инструмента"));
                 questionRepo.save(new Question("Как обозначается вращение планшайбы наклонно-поворотного стола?", milling, milling7, "Ось С"));
