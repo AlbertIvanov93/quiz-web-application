@@ -10,10 +10,11 @@ body {
 }
 
 .outer_box {
-    position: fixed;
-    top: 10%;
-    left: 35%;
     pointer-events: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
 }
 
 .outer_box img {

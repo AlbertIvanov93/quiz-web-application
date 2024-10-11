@@ -30,7 +30,7 @@ public class ExcelFileCreator {
     private static String scoreName = "Правильных ответов";
     private static String maxScoreName = "Количество вопросов";
 
-    private final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    private static final SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
 
     public Workbook createWorkbook() {
@@ -114,6 +114,7 @@ public class ExcelFileCreator {
 
         //заполнить все результаты пользователей
         Iterable<Result> results = resultRepository.findAll();
+
         results.forEach(result -> {
             //информация о пользователе
             Row resultRow =  sheet.createRow((int) (result.getId() + resultStartRow));
@@ -121,8 +122,10 @@ public class ExcelFileCreator {
             resultIdCell.setCellValue(result.getId());
             Cell userNameCell = resultRow.createCell(1);
             userNameCell.setCellValue(result.getUser().getFirstName() + " " + result.getUser().getLastName());
-            Cell beginDateCell = resultRow.createCell(2);
-            beginDateCell.setCellValue(formatter.format(result.getBeginDate()));
+            if (result.getBeginDate() != null) {
+                Cell beginDateCell = resultRow.createCell(2);
+                beginDateCell.setCellValue(formatter.format(result.getBeginDate()));
+            }
             Cell endDateCell = resultRow.createCell(3);
             endDateCell.setCellValue(formatter.format(result.getEndDate()));
             Cell scoreCell = resultRow.createCell(4);

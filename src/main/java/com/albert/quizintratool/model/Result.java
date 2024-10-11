@@ -43,7 +43,7 @@ public class Result {
         this.maxScore = maxScore;
     }
 
-    private SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+    private static SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 
     @Override
     public String toString() {

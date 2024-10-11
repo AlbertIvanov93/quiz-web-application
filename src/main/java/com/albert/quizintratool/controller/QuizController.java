@@ -1,6 +1,5 @@
 package com.albert.quizintratool.controller;
 
-import com.albert.quizintratool.config.SessionData;
 import com.albert.quizintratool.model.Question;
 import com.albert.quizintratool.model.Result;
 import com.albert.quizintratool.model.User;
@@ -9,7 +8,6 @@ import com.albert.quizintratool.repository.ResultRepository;
 import com.albert.quizintratool.repository.TopicRepository;
 import com.albert.quizintratool.service.MailSenderService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +17,7 @@ import java.util.*;
 
 @Controller
 @RequestMapping("/quiz/")
-@SessionAttributes("questions")
+@SessionAttributes({"questions", "beginDate"})
 @RequiredArgsConstructor
 public class QuizController {
 
@@ -30,12 +28,10 @@ public class QuizController {
 
     @GetMapping
     public String showQuiz(@RequestParam(name = "topic_id") Long topicId,
-                           Model model,
-                           SessionData sessionData) {
+                           Model model) {
         // если тема есть, то обновить модель и вернуть страницу квиза
         if (topicRepository.findById(topicId).isPresent()) {
             addAttributeToModel(topicId, model);
-            sessionData.setBeginDate(new Date());
             return "quiz";
         }
         // в ином случае - домашнюю страницу
@@ -43,8 +39,8 @@ public class QuizController {
     }
 
     @PostMapping
-    public String getResult(Model model,
-                            SessionData sessionData,
+    public String getResult(@SessionAttribute("questions") List<Question> questions,
+                            @SessionAttribute("beginDate") Date beginDate,
                             @AuthenticationPrincipal User user,
                             @RequestParam(name = "answer[0]", defaultValue = "Время вышло") String answer0,
                             @RequestParam(name = "answer[1]", defaultValue = "Время вышло") String answer1,
@@ -76,12 +72,8 @@ public class QuizController {
                             @RequestParam(name = "answer[27]", defaultValue = "Время вышло") String answer27,
                             @RequestParam(name = "answer[28]", defaultValue = "Время вышло") String answer28,
                             @RequestParam(name = "answer[29]", defaultValue = "Время вышло") String answer29) {
-        List<Question> questions = (List<Question>) model.getAttribute("questions");
-        Date beginDate = sessionData.getBeginDate();
         Map<Question, String> resultMap = new HashMap<>();
 
-
-        System.out.println(beginDate);
         List<String> userAnswer = List.of(answer0, answer1, answer2, answer3, answer4,
                 answer5, answer6, answer7, answer8, answer9, answer10, answer11, answer12,
                 answer13, answer14, answer15, answer16, answer17, answer18, answer19,
@@ -107,7 +99,6 @@ public class QuizController {
     }
 
     private void addAttributeToModel(Long topicId, Model model) {
-
 
         String modelQuestionsName = "questions";
         String modelBeginDate = "beginDate";

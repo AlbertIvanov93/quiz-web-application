@@ -51,14 +51,13 @@ public class UserResultsController {
 
     @GetMapping(value="/download")
     public ResponseEntity<ByteArrayResource> downloadResults() {
-        try {
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            Workbook workbook = excelFileCreator.createWorkbook();
+        try(ByteArrayOutputStream stream = new ByteArrayOutputStream();
+            Workbook workbook = excelFileCreator.createWorkbook()) {
             HttpHeaders header = new HttpHeaders();
             header.setContentType(new MediaType("application", "force-download"));
-            header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=ProductTemplate.xlsx");
+            header.set(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=Results.xlsx");
             workbook.write(stream);
-            workbook.close();
+
             return new ResponseEntity<>(new ByteArrayResource(stream.toByteArray()),
                     header, HttpStatus.CREATED);
         } catch (Exception e) {
